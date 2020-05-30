@@ -1,3 +1,7 @@
+""" THIS PRODUCES THE CORRECT ANSWER BUT IS NOT EFFICIENT ENOUGH TO RUN FOR 200K.
+WITH 1K RUNS IT WORKED AND PRODUCED 17.
+"""
+
 import math
 from copy import deepcopy
 import random
@@ -87,7 +91,7 @@ def super_efficiently_run_the_fucker(edges, nodes):
     save_nodes = deepcopy(nodes)
     returns = []
 
-    for i in range(N):
+    for i in range(1000):
         if i % 100 == 0:
             print(f'current run is {i}')
         # print(edges)
@@ -96,6 +100,7 @@ def super_efficiently_run_the_fucker(edges, nodes):
         edges = deepcopy(save_edges)
         nodes = deepcopy(save_nodes)
 
+    print(returns)
     print(min(returns))
     print('done!')
 

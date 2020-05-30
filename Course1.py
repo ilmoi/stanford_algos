@@ -728,7 +728,7 @@ def run_the_fucker(G):
     print('done!')
 
 # =============================================
-# 9.4 better, but not good enough
+# 9.4 better, but not good enough (also wrong)
 iter=0
 def efficient_random_contraction(G):
 
@@ -750,7 +750,6 @@ def efficient_random_contraction(G):
             print(f'picked a zombie!!!! {j}')
             relevant_swap = [swap for swap in swaps if swap[1] == j][0]
             j = relevant_swap[0]
-
             print(f"updated j to {j}, so really the edge is {i}-{j}")
 
         # recognize self-loop
@@ -797,24 +796,24 @@ efficient_random_contraction(Real_G)
 
 
 # =============================================
-# 9.5 turned out to be worse - here we used both edges and nodes
+# 9.5 correct but not quick enough to run 200k. With 1k seems to get the right answer tho
 
-# SELECTOR = Real_G
-# edges = {}
-# i = 1
-# for key, value in list(SELECTOR.items()):
-#     for v in value:
-#         edge = sorted([key, v])
-#         if edge not in list(edges.values()):
-#             edges[i] = edge
-#             i+=1
-#
-# nodes = {}
-# for n in range(1, len(SELECTOR)+1): #IMPORTANT!!!!!! WHEN USING REAL_G NEED TO SET START +1 AND END +1, THIS IS BECAUSE THE FILE BEGINS WITH LINE 1 AND ENDS WITH 200 NOT 0 AND 199
-#     nodes[n] = []
-#     for key, value in list(edges.items()):
-#         if n in value:
-#             nodes[n].append(key)
+SELECTOR = Real_G
+edges = {}
+i = 1
+for key, value in list(SELECTOR.items()):
+    for v in value:
+        edge = sorted([key, v])
+        if edge not in list(edges.values()):
+            edges[i] = edge
+            i+=1
+
+nodes = {}
+for n in range(1, len(SELECTOR)+1): #IMPORTANT!!!!!! WHEN USING REAL_G NEED TO SET START +1 AND END +1, THIS IS BECAUSE THE FILE BEGINS WITH LINE 1 AND ENDS WITH 200 NOT 0 AND 199
+    nodes[n] = []
+    for key, value in list(edges.items()):
+        if n in value:
+            nodes[n].append(key)
 
 def super_efficient_contraction(edges, nodes):
     while len(nodes) > 2:
